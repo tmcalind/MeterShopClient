@@ -13,7 +13,7 @@ const LandingAppBar = ({ title }) => {
       <AppBar position="static">
         <Toolbar color="primary">
           <Typography variant="h4" component="span">
-            {title}
+            {title} 
           </Typography>
           <UserStatus />
         </Toolbar>
