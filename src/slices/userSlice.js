@@ -7,7 +7,11 @@ import {
     initialState: {
       auth: null,
       roles: null,
-      prefs: null
+      prefs: null,
+      arcGISAuth: null,
+      status: "notLoggedIn",
+      cityworksLoginName: "?",
+      cityworksToken: null
     },
     reducers: {
         setUser: (state, action) => {
@@ -23,7 +27,20 @@ import {
       },
       setPrefs: (state, action) => {
           state.prefs = action.payload;
-      }
+      },
+      setArcGISAuth: (state, action) => {
+        state.arcGISAuth = action.payload;
+      },
+      setStatus: (state, action) => {
+        state.status = action.payload;
+      },
+      setCityworksLoginName: (state, action) => {
+        state.cityworksLoginName = action.payload;
+      },
+      setCityworksToken: (state, action) => {
+        state.cityworksToken = action.payload;
+      },
+      
     },
   });
   
@@ -31,7 +48,11 @@ import {
     setUser,
     setAuth,
     setRoles,
-    setPrefs
+    setPrefs,
+    setArcGISAuth,
+    setStatus,
+    setCityworksLoginName,
+    setCityworksToken
   } = userSlice.actions;
   
   export default userSlice.reducer;

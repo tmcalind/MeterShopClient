@@ -1,7 +1,7 @@
 export const esriMapStreets = {
     basemap: 'streets-vector',
     width: '700px',
-    height: '800px',
+    height: '700px',
     center: [-81.26, 42.985],
     scale: 80000
   };
@@ -13,6 +13,8 @@ export const esriMapStreets = {
     center: [-81.26, 42.985],
     scale: 5000
   };
+
+  
 
   export const mockHydroServiceOrderObjectIds = [
     68866, 68871, 68872, 68880, 68881,

@@ -8,8 +8,6 @@ import AdminPage from './pages/AdminPage';
 import FieldPage from './pages/FieldPage';
 import LandingPage from './pages/LandingPage';
 
-import { imposterTom } from './imposters';
-
 const theme = createTheme({
   typography: {
     fontSize: 14
@@ -30,44 +28,29 @@ const theme = createTheme({
     background: {
       paper: '#cfd8dc'
     },
-    mode: imposterTom.roles.theme
   }
 });
 
 function App() {
+  const userStatus = useSelector((state) => state.user.status)
 
-  const userAuth = useSelector((state) => state.user.auth);
-  const userRoles = useSelector((state) => state.user.roles);
-
-  console.log('App.js',userAuth, userRoles)
   return (
-    <>
-    
+    <>  
       <ThemeProvider theme={theme}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
-            {userAuth ? (
-              <>
-                {!userRoles.admin && !userRoles.field ? (
-                  <LandingPage 
-                    message="You are authenticated but have not been assigned a role. Contact MeterShop Admin"
-                  />
-                ) : (
-                  <>
-                    {userRoles.admin && !userRoles.field && <AdminPage /> }
-                    {userRoles.field && !userRoles.admin && <FieldPage />}        
-                  </>
-                )}
-              </>
-              ) : (
+            {userStatus === "notLoggedIn" && (
               <LandingPage 
-                  message="Welcome to MeterShop. Login to begin." 
-              />) 
-            } 
+                message="Welcome to MeterShop. Login to begin." 
+              />
+            ) }
+            {userStatus == "admin" && <AdminPage />}
+
+            {userStatus == "field" && <FieldPage />}
+
           </Grid>
         </Grid>
       </ThemeProvider>
-      
     </>
   );
 }

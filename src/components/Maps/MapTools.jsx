@@ -5,7 +5,7 @@ import UniqueValueRenderer from "@arcgis/core/renderers/UniqueValueRenderer";
 import TextSymbol from '@arcgis/core/symbols/TextSymbol'
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
-import { WATER_METER_ADDRESSES_FEATURE_SERVER_URL } from '../../config'
+import { WATER_METER_ADDRESSES_FEATURE_SERVER_URL, DEVICE_LOCATIONS_FEATURE_SERVER_URL, ARCGIS_SERVICES_BASE_URL } from '../../config'
 
 const inServiceGreen = [17, 102, 0];
 const markedBlue = [0, 38, 230];
@@ -223,6 +223,49 @@ export const getMetersFeatureLayer = () => {
 
     return waterMetersFeatureLayer;
 };
+
+export const getDeviceLocationsFeatureLayer = () => {
+  const deviceLocationsFeatureLayer = new FeatureLayer({
+    url: DEVICE_LOCATIONS_FEATURE_SERVER_URL,
+    spatialReference: 26917,
+    name: 'DeviceLocations',
+    title: 'Device Locations',
+    outFields: ['OBJECTID', 'Id', 'CurrentMeterId'],
+    renderer: {
+      type: 'simple',
+      symbol: {
+        type: 'simple-marker',
+        size: 5,
+        color: '#1B4D3E',
+      },
+    },
+    minScale: 8000,
+  });
+
+  const query = deviceLocationsFeatureLayer.createQuery();
+
+  deviceLocationsFeatureLayer.queryFeatures(query).then(() => {});
+
+  return deviceLocationsFeatureLayer;
+};
+
+export const getBuildingsFeatureLayer = () => {
+  const buildingsLayerUrl = `${ARCGIS_SERVICES_BASE_URL}/arcgisb/rest/services/References/TOPO/MapServer/0`;
+  const buildingsLayer = new FeatureLayer({
+    url: buildingsLayerUrl,
+    id: 'Building_layer',
+    minScale: 8000,
+    renderer: {
+      type: 'simple',
+      symbol: {
+        type: 'simple-fill',
+        color: [238, 238, 238, 0.5],
+      },
+    },
+  });
+
+  return buildingsLayer;
+}
 
 export const getGraphicsLayer = (
   objectIds,

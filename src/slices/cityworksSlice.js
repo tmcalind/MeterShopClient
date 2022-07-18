@@ -7,7 +7,8 @@ export const cityworksSlice = createSlice({
         tasksVisible: false,
         tasksLastUpdate: null,
         selectedWorkOrderId: null,
-        selectedWorkOrder: null
+        selectedWorkOrder: null,
+        selectedDeviceLocationId: null,
     },
     reducers: {
         setTasks: (state, action) => { state.tasks = action.payload; },
@@ -15,6 +16,7 @@ export const cityworksSlice = createSlice({
         setTasksLastUpdate: (state, action) => { state.tasksLastUpdate = action.payload; },
         setSelectedWorkOrderId: (state, action) => { state.selectedWorkOrderId = action.payload; },
         setSelectedWorkOrder: (state, action) => { state.selectedWorkOrder = action.payload; },
+        setSelectedDeviceLocationId: (state, action) => { state.selectedDeviceLocationId = action.payload; }
     }
 });
 
@@ -23,7 +25,8 @@ export const {
     setTasksVisible,
     setTasksLastUpdate,
     setSelectedWorkOrderId,
-    setSelectedWorkOrder
+    setSelectedWorkOrder,
+    setSelectedDeviceLocationId,
 } = cityworksSlice.actions;
 
 export default cityworksSlice.reducer;
